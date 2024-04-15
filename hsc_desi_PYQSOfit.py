@@ -271,7 +271,7 @@ def HSC_DESI_QSOFIT(ID, table, save = False, download = False, plot = True, plot
             wave_mask=None, decompose_host=True, host_prior=False, decomp_na_mask=False,host_line_mask=False, 
             npca_gal=5, npca_qso=10, qso_type='CZBIN1',host_type='BC03',Fe_uv_op=True,\
             poly=False, BC=False, rej_abs_conti=False, rej_abs_line=False, linefit=True, save_result=save, save_fig=save_fig, \
-            kwargs_plot={'save_fig_path':path_out, 'broad_fwhm':1200}, save_fits_path=path_out, verbose=verbose, param_file_name='qsopar.fits', plot_fig = plot, MC = MC)
+            kwargs_plot={'save_fig_path':path_out, 'broad_fwhm':1200}, save_fits_path=path_out, verbose=verbose, param_file_name='qsopar.fits', plot_fig = plot, MC = MC, nsamp = 50)
     #plt.xlim([100,7000])
     #plt.ylim([-1,100])
     end = timeit.default_timer()
