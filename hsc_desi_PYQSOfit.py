@@ -224,7 +224,7 @@ if not os.path.exists('qsopar.fits'):
 # from glob import glob 
 
 
-def HSC_DESI_QSOFIT(ID, table, save = False, download = False, plot = True, plot_show = False, save_fig = False, verbose = True, MC = False):
+def HSC_DESI_QSOFIT(ID, table, save = False, download = False, plot = True, plot_show = False, save_fig = False, verbose = True, MC = False, save_path = None):
 
 
     #fujidata = Table.read('Data/DESI_EDR_all_match_0pt5arcsec_S20A_20240401_AG_AGN_all_14h_FWHM1000.fits')
@@ -266,12 +266,15 @@ def HSC_DESI_QSOFIT(ID, table, save = False, download = False, plot = True, plot
     # do the fitting
     # TODO: BC03 will fail on this fitting!!!
 
+    if save_path == None:
+        save_path = path_out
+
     start = timeit.default_timer()
     q0.Fit(name=None, nsmooth=1, deredden=True, reject_badpix=False, wave_range=wave_range, \
             wave_mask=None, decompose_host=True, host_prior=False, decomp_na_mask=False,host_line_mask=False, 
             npca_gal=5, npca_qso=10, qso_type='CZBIN1',host_type='BC03',Fe_uv_op=True,\
             poly=False, BC=False, rej_abs_conti=False, rej_abs_line=False, linefit=True, save_result=save, save_fig=save_fig, \
-            kwargs_plot={'save_fig_path':path_out, 'broad_fwhm':1200}, save_fits_path=path_out, verbose=verbose, param_file_name='qsopar.fits', plot_fig = plot, MC = MC, nsamp = 50)
+            kwargs_plot={'save_fig_path':save_path, 'broad_fwhm':1200}, save_fits_path=path_out, verbose=verbose, param_file_name='qsopar.fits', plot_fig = plot, MC = MC, nsamp = 50)
     #plt.xlim([100,7000])
     #plt.ylim([-1,100])
     end = timeit.default_timer()
