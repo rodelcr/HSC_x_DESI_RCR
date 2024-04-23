@@ -22,6 +22,7 @@ path_out = 'QSOFit_out/.'
 
 #if not os.path.exists('qsopar.fits'):
 
+
 hdr0 = fits.Header()
 
 hdr0['Author'] = 'Rodrigo Cordova'
@@ -42,41 +43,47 @@ narrowlo = 10/np.sqrt(8*np.log(2))/c # FWHM in km/s turned into sigma/c
 narrowhi = 800/np.sqrt(8*np.log(2))/c # FWHM in km/s turned into sigma/c 
 
 maxsca = 1e10
-minsca =-50
+minsca =0
 
 comple_x = 'all'
-minwav = 1000
-maxwav = 7000
+minwav = 1200
+maxwav = 6900
+
+voff_narrow = 20/np.sqrt(8*np.log(2))/c # FWHM in km/s turned into sigma/c 
 
 newdata = np.rec.array([
-(6564.61, comple_x, minwav, maxwav, 'Ha_br',   1, 0.0, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.01, 0, 0, 0, 0.05 , 1),
-(6564.61, comple_x, minwav, maxwav, 'Ha_na',   1, 0.0, minsca, maxsca, 5.2e-4,narrowlo,narrowhi, 0.001, 1, 1, 0, 0.002, 1),
-(6549.85, comple_x, minwav, maxwav, 'NII6549', 1, 0.0, minsca, maxsca, 5.2e-4,narrowlo,narrowhi, 5e-3,  1, 1, 0, 0.001, 1),
-(6585.28, comple_x, minwav, maxwav, 'NII6585', 1, 0.0, minsca, maxsca, 5.2e-4,narrowlo, narrowhi, 5e-3,  1, 1, 0, 0.003, 1),
-(6718.29, comple_x, minwav, maxwav, 'SII6718', 1, 0.0, minsca, maxsca, 1e-3, narrowlo, narrowhi, 5e-3,  1, 1, 2, 0.001, 1),
-(6732.67, comple_x, minwav, maxwav, 'SII6732', 1, 0.0, minsca, maxsca, 1e-3, narrowlo, narrowhi, 5e-3,  1, 1, 2, 0.001, 1),
+(6564.61, comple_x, minwav, maxwav, 'Ha_br',   1, 0.1, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.01, 0, 0, 0, 0.05 , 1),
+(6564.61, comple_x, minwav, maxwav, 'Ha_na',   1, 0.1, minsca, maxsca, 5.2e-4,narrowlo,narrowhi, 0.001, 1, 1, 0, 0.002, 1),
+(6549.85, comple_x, minwav, maxwav, 'NII6549', 1, 0.1, minsca, maxsca, 5.2e-4,narrowlo,narrowhi, 5e-3,  1, 1, 0, 0.001, 1),
+(6585.28, comple_x, minwav, maxwav, 'NII6585', 1, 0.1, minsca, maxsca, 5.2e-4,narrowlo, narrowhi, 5e-3,  1, 1, 0, 0.003, 1),
+(6718.29, comple_x, minwav, maxwav, 'SII6718', 1, 0.1, minsca, maxsca, 1e-3, narrowlo, narrowhi, 5e-3,  1, 1, 2, 0.001, 1),
+(6732.67, comple_x, minwav, maxwav, 'SII6732', 1, 0.1, minsca, maxsca, 1e-3, narrowlo, narrowhi, 5e-3,  1, 1, 2, 0.001, 1),
     
-(4862.68, comple_x, minwav, maxwav, 'Hb_br',     1, 0.0, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.01, 0, 0, 0, 0.01 , 1),
-(4862.68, comple_x, minwav, maxwav, 'Hb_na',     1, 0.0, minsca, maxsca, 1e-3, narrowlo,narrowhi, 0.001, 1, 1, 0, 0.002, 1),
-(4960.30, comple_x, minwav, maxwav, 'OIII4959c', 1, 0.0, minsca, maxsca, 5e-4,narrowlo, narrowhi, 0.001, 1, 1, 0, 0.002, 1),
-(5008.24, comple_x, minwav, maxwav, 'OIII5007c', 1, 0.0, minsca, maxsca, 5e-4, narrowlo, narrowhi, 0.001, 1, 1, 0, 0.004, 1),
+(4862.68, comple_x, minwav, maxwav, 'Hb_br',     1, 0.1, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.01, 0, 0, 0, 0.01 , 1),
+(4862.68, comple_x, minwav, maxwav, 'Hb_na',     1, 0.1, minsca, maxsca, 1e-3, narrowlo,narrowhi, 0.001, 1, 1, 0, 0.002, 1),
+(4960.30, comple_x, minwav, maxwav, 'OIII4959c', 1, 0.1, minsca, maxsca, 5e-4,narrowlo, narrowhi, 0.001, 1, 1, 0, 0.002, 1),
+(5008.24, comple_x, minwav, maxwav, 'OIII5007c', 1, 0.1, minsca, maxsca, 5e-4, narrowlo, narrowhi, 0.001, 1, 1, 0, 0.004, 1),
 #(4960.30, 'Hb', 4640, 5100, 'OIII4959w',   1, 0.0, 0.0, 1e10, 3e-3, narrowlo, narrowhi,  0.01,  2, 2, 0, 0.001, 1),
 #(5008.24, 'Hb', 4640, 5100, 'OIII5007w',   1, 0.0, 0.0, 1e10, 3e-3, narrowlo, narrowhi,  0.01,  2, 2, 0, 0.002, 1),
 # (4687.02, 'Hb', 4640, 5100, 'HeII4687_br', 1, 0.0, 0.0, 1e10, 5e-3, 0.004,  0.05,   0.005, 0, 0, 0, 0.001, 1),
 # (4687.02, 'Hb', 4640, 5100, 'HeII4687_na', 1, 0.0, 0.0, 1e10, 1e-3, 2.3e-4, 0.00169, 0.005, 1, 1, 0, 0.001, 1),
 
-(4340, comple_x, minwav, maxwav, 'Hg_br',     1, 0.0, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.01, 0, 0, 0, 0.01 , 1),
-(4340, comple_x, minwav, maxwav, 'Hg_na',     1, 0.0, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.001, 1, 1, 0, 0.002, 1),
+(4340, comple_x, minwav, maxwav, 'Hg_br',     1, 0.1, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.01, 0, 0, 0, 0.01 , 1),
+(4340, comple_x, minwav, maxwav, 'Hg_na',     1, 0.1, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.001, 1, 1, 0, 0.002, 1),
+
+(4101.734, comple_x, minwav, maxwav, 'Hd_br',     1, 0.1, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.01, 0, 0, 0, 0.01 , 1),
+(4101.734, comple_x, minwav, maxwav, 'Hd_na',     1, 0.1, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.001, 1, 1, 0, 0.002, 1),
 
 #(3934.78, 'CaII', 3900, 3960, 'CaII3934' , 2, 0.1, 0.0, 1e10, 1e-3, 3.333e-4, 0.0017, 0.01, 99, 0, 0, -0.001, 1),
 
-(3728.48, comple_x, minwav, maxwav, 'OII3728', 1, 0.0, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.02, 1, 1, 0, 0.001, 1),
+(3726.1, comple_x, minwav, maxwav, 'OII3726', 1, 0.1, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.02, 1, 1, 0, 0.001, 1),
+(3728.8, comple_x, minwav, maxwav, 'OII3728', 1, 0.1, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.02, 1, 1, 0, 0.001, 1),
 
-(3426.84, comple_x, minwav, maxwav, 'NeV3426',    1, 0.0, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.02, 1, 1, 0, 0.001, 1),
+(3426.84, comple_x, minwav, maxwav, 'NeV3426',    1, 0.1, minsca, maxsca, 1e-3, narrowlo, narrowhi, 0.02, 1, 1, 0, 0.001, 1),
 
-(2798.75, comple_x, minwav, maxwav, 'MgII_br', 1, 0.0, minsca, maxsca, 5e-3, broadlo,  broadhi, 0.015, 0, 0, 0, 0.05, 1),
-(2796.35, comple_x, minwav, maxwav, 'MgII_na1', 1, 0.0, minsca, maxsca, 1e-3,narrowlo, narrowhi, 0.01, 1, 1, 0, 0.002, 1),
-(2803.53, comple_x, minwav, maxwav, 'MgII_na2', 1, 0.0, minsca, maxsca, 1e-3,narrowlo, narrowhi, 0.01, 1, 1, 0, 0.002, 1),
+(2798.75, comple_x, minwav, maxwav, 'MgII_br', 1, 0.1, minsca, maxsca, 5e-3, broadlo,  broadhi, 0.015, 0, 0, 0, 0.05, 1),
+(2796.35, comple_x, minwav, maxwav, 'MgII_na1', 1, 0.1, minsca, maxsca, 1e-3,narrowlo, narrowhi, 0.01, 1, 1, 0, 0.002, 1),
+(2803.53, comple_x, minwav, maxwav, 'MgII_na2', 1, 0.1, minsca, maxsca, 1e-3,narrowlo, narrowhi, 0.01, 1, 1, 0, 0.002, 1),
 
 # (1908.73, 'CIII', 1700, 1970, 'CIII_br',   2, 0.1, 0.0, 1e10, 5e-3, 0.004, 0.05, 0.015, 99, 0, 0, 0.01, 1),
 #(1908.73, 'CIII', 1700, 1970, 'CIII_na',   1, 0.1, 0.0, 1e10, 1e-3, 5e-4,  0.0017, 0.01,  1, 1, 0, 0.002, 1),
@@ -87,8 +94,8 @@ newdata = np.rec.array([
 #(1750.26, 'CIII', 1700, 1970, 'NIII1750',  1, 0.1, 0.0, 1e10, 2e-3, 0.001, 0.015,  0.01,  1, 1, 0, 0.001, 1),
 #(1718.55, 'CIII', 1700, 1900, 'NIV1718',   1, 0.1, 0.0, 1e10, 2e-3, 0.001, 0.015,  0.01,  1, 1, 0, 0.001, 1),
 
-(1549.06, comple_x, minwav, maxwav, 'CIV_br', 1, 0.0, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.015, 0, 0, 0, 0.05 , 1),
-(1549.06, comple_x, minwav, maxwav, 'CIV_na', 1, 0.0, minsca, maxsca, 1e-3,narrowlo,  narrowhi, 0.01,  1, 1, 0, 0.002, 1),
+(1549.06, comple_x, minwav, maxwav, 'CIV_br', 1, 0.1, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.015, 0, 0, 0, 0.05 , 1),
+(1549.06, comple_x, minwav, maxwav, 'CIV_na', 1, 0.1, minsca, maxsca, 1e-3,narrowlo,  narrowhi, 0.01,  1, 1, 0, 0.002, 1),
 # (1640.42, 'CIV', 1500, 1700, 'HeII1640',    1, 0.1, 0.0, 1e10, 1e-3, 5e-4,   0.0017, 0.008, 1, 1, 0, 0.002, 1),
 # (1663.48, 'CIV', 1500, 1700, 'OIII1663',    1, 0.1, 0.0, 1e10, 1e-3, 5e-4,   0.0017, 0.008, 1, 1, 0, 0.002, 1),
 # (1640.42, 'CIV', 1500, 1700, 'HeII1640_br', 1, 0.1, 0.0, 1e10, 5e-3, 0.0025, 0.02,   0.008, 1, 1, 0, 0.002, 1),
@@ -99,8 +106,8 @@ newdata = np.rec.array([
 #(1335.30, 'SiIV', 1290, 1450, 'CII1335',   1, 0.1, 0.0, 1e10, 2e-3, 0.001, 0.015, 0.01,  1, 1, 0, 0.001, 1),
 #(1304.35, 'SiIV', 1290, 1450, 'OI1304',    1, 0.1, 0.0, 1e10, 2e-3, 0.001, 0.015, 0.01,  1, 1, 0, 0.001, 1),
 
-(1215.67, comple_x, minwav, maxwav, 'Lya_br', 1, 0.0, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.02, 0, 0, 0, 0.05 , 1),
-(1215.67, comple_x, minwav, maxwav, 'Lya_na', 1, 0.0, minsca, maxsca, 1e-3,narrowlo,  narrowhi, 0.01, 1, 1, 0, 0.002, 1)
+(1215.67, comple_x, minwav, maxwav, 'Lya_br', 1, 0.1, minsca, maxsca, 5e-3, broadlo,  broadhi,   0.02, 0, 0, 0, 0.05 , 1),
+(1215.67, comple_x, minwav, maxwav, 'Lya_na', 1, 0.1, minsca, maxsca, 1e-3,narrowlo,  narrowhi, 0.01, 1, 1, 0, 0.002, 1)
 #          (1215.67, 'Lya',     1150,    1290,    'Lya_na',  1,       0.1,     0.0,    1e10,    1e-3,   narrowlo,narrowhi, 0.01,     0,      0,       0,      0.002,    1)
 #           (6564.61, 'Ha',     6400,    6800,     'Ha_na',   1,      0.0,     0.0, 1e10, 5.2e-4,narrowlo,narrowhi, 0.001, 1, 1, 0, 0.002, 1),
 # (6549.85, 'Ha', 6400, 6800, 'NII6549', 1, 0.0, 0.0, 1e10, 5.2e-4,narrowlo,narrowhi, 5e-3,  1, 1, 0, 0.001, 1),
@@ -155,6 +162,7 @@ conti_windows = np.rec.array([
     (1970., 2400.),
     (2480., 2675.),
     (2925., 3400.),
+    (3500., 3650.),
     (3775., 3832.),
     (4000., 4050.),
     (4200., 4230.),
