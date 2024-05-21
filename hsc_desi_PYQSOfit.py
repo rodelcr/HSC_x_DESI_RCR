@@ -304,6 +304,9 @@ def HSC_DESI_QSOFIT(ID, table, save = False, download = False, plot = True, plot
     if plot_show == True:
         plt.show()
 
+    np.save(f'{save_path}/{plateid}_fit.npy', q0)
+
+
     return q0
 
 
@@ -364,6 +367,8 @@ def HSC_DESI_QSOFIT_lambda_flux(lam, flux, z, err, name = None, save = False, pl
     print(f'Fitting finished in {np.round(end - start, 1)}s')
     if plot_show == True:
         plt.show()
+
+    np.save(f'{save_path}/{plateid}_fit.npy', q0)
 
     return q0
 
