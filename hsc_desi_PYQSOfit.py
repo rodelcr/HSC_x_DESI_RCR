@@ -285,15 +285,39 @@ def essential_plotting_components_from_self(self):
         # Plot the line component
         lines_total += line_single
 
-    out = {'wave':self.wave,
-           'f_conti_model_eval':f_conti_model_eval,
-           'flux_prereduced':self.flux_prereduced,
-           'f_line_model':self.f_line_model,
-           'f_conti_model':self.f_conti_model,
-           'qso':self.qso,
-           'host':self.host,
-           'flux':self.flux,
-    }
+    try:
+        out = {'wave':self.wave,
+            'f_conti_model_eval':f_conti_model_eval,
+            'flux_prereduced':self.flux_prereduced,
+            'f_line_model':self.f_line_model,
+            'f_conti_model':self.f_conti_model,
+            'line_flux':self.line_flux,
+            'qso':self.qso,
+            'host':self.host,
+            'flux':self.flux,
+        }
+
+    except AttributeError:
+        try:
+            out = {'wave':self.wave,
+                    'f_conti_model_eval':f_conti_model_eval,
+                    'flux_prereduced':self.flux_prereduced,
+                    'f_line_model':self.f_line_model,
+                    'f_conti_model':self.f_conti_model,
+                    'line_flux':self.line_flux,
+                    'host':self.host,
+                    'flux':self.flux,
+                    }
+        except AttributeError:
+            out = {'wave':self.wave,
+                    'f_conti_model_eval':f_conti_model_eval,
+                    'flux_prereduced':self.flux_prereduced,
+                    'f_line_model':self.f_line_model,
+                    'f_conti_model':self.f_conti_model,
+                    'line_flux':self.line_flux,
+                    'flux':self.flux,
+                    }
+
 
     #ax.plot(wave_eval, line_single + f_conti_model_eval, color=color, zorder=5) ### 
     #ax.plot(wave_eval, lines_total + f_conti_model_eval, 'b', label='line', zorder=6) ### 
