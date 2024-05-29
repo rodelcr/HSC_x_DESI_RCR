@@ -283,9 +283,6 @@ def essential_plotting_components_from_self(self):
         # self.f_line_model += self.Onegauss(np.log(wave), gauss_result_p)
 
         # Plot the line component
-        for c in range(ncomp_fit):
-            #axn[1][c].plot(wave_eval, line_single, color=color, zorder=line_order[color]) 
-
         lines_total += line_single
 
     out = {'wave':self.wave,
