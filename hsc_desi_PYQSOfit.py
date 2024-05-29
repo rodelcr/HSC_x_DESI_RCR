@@ -246,6 +246,80 @@ hdu_list.writeto('qsopar.fits', overwrite=True)
 # from glob import glob 
 
 
+def essential_plotting_components_from_self(self):
+    pp = list(self.conti_fit.params.valuesdict().values())
+    mc_flag = 2
+    broad_fwhm=1200
+
+    ncomp_fit = len(self.fur_result) // (
+            mc_flag * 6)  # TODO: Not 5 here. But better not use absolute value to fully fix this bug
+
+
+
+
+    wave_eval = np.linspace(np.min(self.wave) - 200, np.max(self.wave) + 200, 5000)
+    
+    lines_total = np.zeros_like(wave_eval)
+
+    f_conti_model_eval = self.PL(wave_eval, pp) + self.Fe_flux_mgii(wave_eval, pp[0:3]) + self.Fe_flux_balmer(
+            wave_eval, pp[3:6]) + self.F_poly_conti(wave_eval, pp[11:]) + self.Balmer_conti(wave_eval, pp[8:11])
+
+
+    for p in range(len(self.gauss_result) // (mc_flag * 3)):
+        gauss_result_p = self.gauss_result[p * 3 * mc_flag:(p + 1) * 3 * mc_flag:mc_flag]
+
+        # Broad or narrow line check
+        if self.CalFWHM(self.gauss_result[(2 + p * 3) * mc_flag]) < broad_fwhm:
+            # Narrow
+            color = 'g'
+            self.f_line_narrow_model += self.Onegauss(np.log(self.wave), gauss_result_p)
+        else:
+            # Broad
+            color = 'r'
+            self.f_line_br_model += self.Onegauss(np.log(self.wave), gauss_result_p)
+
+        # Evaluate the line component
+        line_single = self.Onegauss(np.log(wave_eval), gauss_result_p)
+        # self.f_line_model += self.Onegauss(np.log(wave), gauss_result_p)
+
+        # Plot the line component
+        for c in range(ncomp_fit):
+            #axn[1][c].plot(wave_eval, line_single, color=color, zorder=line_order[color]) 
+
+        lines_total += line_single
+
+    out = {'wave':self.wave,
+           'f_conti_model_eval':f_conti_model_eval,
+           'flux_prereduced':self.flux_prereduced,
+           'f_line_model':self.f_line_model,
+           'f_conti_model':self.f_conti_model,
+           'qso':self.qso,
+           'host':self.host,
+           'flux':self.flux,
+    }
+
+    #ax.plot(wave_eval, line_single + f_conti_model_eval, color=color, zorder=5) ### 
+    #ax.plot(wave_eval, lines_total + f_conti_model_eval, 'b', label='line', zorder=6) ### 
+    #ax.plot(self.wave_prereduced[mask], self.flux_prereduced[mask], 'k', label='data', lw=1, zorder=2) ### 
+    #ax.plot(self.wave, self.line_flux - self.f_line_model, 'gray',
+    #                        label='resid', linestyle='dotted', lw=1, zorder=3) ### 
+
+    #ax.plot(self.wave, self.qso + self.host, 'pink', label='host+qso temp', zorder=3) ### 
+    #ax.plot(self.wave, self.flux, 'grey', label='data-host', zorder=1) ### 
+    # Continuum results
+    #ax.plot(wave_eval, f_conti_model_eval, 'c', lw=2, label='FeII', zorder=7) ### 
+    #     ax.plot(wave_eval,
+    #             self.PL(wave_eval, pp) + self.F_poly_conti(wave_eval, pp[11:]) + self.Balmer_conti(wave_eval,
+    #                                                                                                pp[8:11]), 'y',
+    #             lw=2, label='BC', zorder=8) ### 
+
+    # ax.plot(wave_eval, self.PL(wave_eval, pp) + self.F_poly_conti(wave_eval, pp[11:]), color='orange', lw=2,
+    #         label='conti', zorder=9) ### 
+    
+    return out
+
+
+
 def HSC_DESI_QSOFIT(ID, table, save = False, download = False, plot = True, plot_show = False, save_fig = False, verbose = True, MC = False, save_path = None, BC= False):
 
 
