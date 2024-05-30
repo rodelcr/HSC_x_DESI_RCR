@@ -287,6 +287,7 @@ def essential_plotting_components_from_self(self):
 
     try:
         out = {'wave':self.wave,
+               'err': self.err,
             'f_conti_model_eval':f_conti_model_eval,
             'flux_prereduced':self.flux_prereduced,
             'f_line_model':self.f_line_model,
@@ -300,6 +301,7 @@ def essential_plotting_components_from_self(self):
     except AttributeError:
         try:
             out = {'wave':self.wave,
+                   'err': self.err,
                     'f_conti_model_eval':f_conti_model_eval,
                     'flux_prereduced':self.flux_prereduced,
                     'f_line_model':self.f_line_model,
@@ -310,6 +312,7 @@ def essential_plotting_components_from_self(self):
                     }
         except AttributeError:
             out = {'wave':self.wave,
+                   'err': self.err,
                     'f_conti_model_eval':f_conti_model_eval,
                     'flux_prereduced':self.flux_prereduced,
                     'f_line_model':self.f_line_model,
