@@ -175,10 +175,10 @@ hdu2 = fits.BinTableHDU(data=conti_windows, name='conti_windows')
 
 conti_priors = np.rec.array([
     ('Fe_uv_norm',  0.0,   0.0,   1e10,  1), # Normalization of the MgII Fe template [flux]
-    ('Fe_uv_FWHM',  3000,  1200,  18000, 1), # FWHM of the MgII Fe template [AA]
+    ('Fe_uv_FWHM',  150,  10,  500, 1), # FWHM of the MgII Fe template [AA]
     ('Fe_uv_shift', 0.0,   -0.01, 0.01,  1), # Wavelength shift of the MgII Fe template [lnlambda]
     ('Fe_op_norm',  0.0,   0.0,   1e10,  1), # Normalization of the Hbeta/Halpha Fe template [flux]
-    ('Fe_op_FWHM',  3000,  1200,  18000, 1), # FWHM of the Hbeta/Halpha Fe template [AA]
+    ('Fe_op_FWHM',  150,  10,  500, 1), # FWHM of the Hbeta/Halpha Fe template [AA]
     ('Fe_op_shift', 0.0,   -0.01, 0.01,  1), # Wavelength shift of the Hbeta/Halpha Fe template [lnlambda]
     ('PL_norm',     1.0,   0.0,   1e10,  1), # Normalization of the power-law (PL) continuum f_lambda = (lambda/3000)^-alpha
     ('PL_slope',    -1.5,  -5.0,  3.0,   1), # Slope of the power-law (PL) continuum
@@ -457,7 +457,7 @@ def HSC_DESI_QSOFIT_lambda_flux(lam, flux, z, err, name = None, save = False, pl
     q0.Fit(name=None, nsmooth=1, deredden=True, reject_badpix=False, wave_range=wave_range, \
             wave_mask=None, decompose_host=True, host_prior=False, decomp_na_mask=False,host_line_mask=False, 
             npca_gal=5, npca_qso=10, qso_type='CZBIN1',host_type='BC03',Fe_uv_op=True,\
-            poly=False, BC=False, rej_abs_conti=False, rej_abs_line=False, linefit=True, save_result=save, save_fig=save_fig, \
+            poly=False, BC=True, rej_abs_conti=False, rej_abs_line=False, linefit=True, save_result=save, save_fig=save_fig, \
             kwargs_plot={'save_fig_path':save_path, 'broad_fwhm':1200}, save_fits_path=path_out, verbose=verbose, param_file_name='qsopar.fits', plot_fig = plot, MC = MC, nsamp = 50)
     #plt.xlim([100,7000])
     #plt.ylim([-1,100])
